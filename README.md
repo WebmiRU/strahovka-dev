@@ -2,14 +2,27 @@
 
 ##Подготовка к работе
 0. Установить `docker` и `docker-compose`
+1. Скачать основной (главный) контейнер для разработки и запустить его:
+```
+wget https://raw.githubusercontent.com/WebmiRU/strahovka-dev/master/docker-compose.yml
+sudo docker-copose up -d --build
+```
+2. После скачивания и успешного запуска основного контейнера все сервисы будут доступны по адресу: **[https://dev11.ru](https://dev11.ru)**
 
-```
-sudo docker network create --driver bridge strahovka
-```
-4. 
-```
-sudo docker run -p 80:80 -p 443:443 --name=strahovka_nginx --network="strahovka" ewolf34/strahovka-nginx
-```
+---
 
+##Обновление образов docker
+В некоторых случаях может потребоваться обновление `docker-образов`, в частности это касается образа `webmiru/strahovka_dev`. Для обновления образа необходимо выполнить следующие команды:
 
-[comment]: <> (sudo docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data --network="strahovka" portainer/portainer-ce)
+> Команды выполняются в той же папке в которую был скачан файл `docker-compose.yml` по ссылке выше
+
+1. `sudo docker-compose stop`
+2. `sudo docker pull webmiru/strahovka_dev`
+3. `sudo docker-copose up -d --build`
+
+---
+
+##Примечание
+Подготовка к работе основного контейра - разовая операция. В большинстве случаев повторный перезапуск контейнера не требуется. При нормальных условиях контейнер загружается с системой автоматически.
+
+Ручной перезапуск может потребоваться в случае сбоев или для обновления образа контейнера.
